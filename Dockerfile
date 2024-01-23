@@ -16,7 +16,7 @@ RUN git clone -b $BRANCH $MODIFIED_DERPER_GIT tailscale --depth 1 && \
     rm -rf /app/tailscale
 
 FROM alpine:3.18
-RUN apk add --no-cache ca-certificates iptables iproute2 ip6tables
+RUN apk add --no-cache ca-certificates iptables iproute2 ip6tables openssl curl
 WORKDIR /app
 
 # ========= CONFIG =========
@@ -26,10 +26,6 @@ ENV DERP_CERTS=/app/certs/
 ENV DERP_STUN true
 ENV DERP_VERIFY_CLIENTS false
 # ==========================
-
-# apt
-RUN apt-get update && \
-    apt-get install -y openssl curl
 
 COPY build_cert.sh /app/
 COPY --from=builder /app/derper /app/derper
