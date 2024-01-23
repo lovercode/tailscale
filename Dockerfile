@@ -1,4 +1,4 @@
-FROM golang:1.21-alpine  AS builder
+FROM golang:latest  AS builder
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN git clone -b $BRANCH $MODIFIED_DERPER_GIT tailscale --depth 1 && \
     cd /app && \
     rm -rf /app/tailscale
 
-FROM golang:1.21-alpine
+FROM golang:latest 
 RUN apk update && apk add --no-cache openssl curl
 
 WORKDIR /app
