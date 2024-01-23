@@ -1,4 +1,4 @@
-FROM golang:latest AS builder
+FROM golang:1.21-alpine  AS builder
 
 WORKDIR /app
 
@@ -15,7 +15,8 @@ RUN git clone -b $BRANCH $MODIFIED_DERPER_GIT tailscale --depth 1 && \
     cd /app && \
     rm -rf /app/tailscale
 
-FROM ubuntu:20.04
+FROM alpine:3.18
+RUN apk add --no-cache ca-certificates iptables iproute2 ip6tables
 WORKDIR /app
 
 # ========= CONFIG =========
