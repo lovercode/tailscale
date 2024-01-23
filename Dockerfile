@@ -15,8 +15,9 @@ RUN git clone -b $BRANCH $MODIFIED_DERPER_GIT tailscale --depth 1 && \
     cd /app && \
     rm -rf /app/tailscale
 
-FROM alpine:3.18
-RUN apk add --no-cache ca-certificates iptables iproute2 ip6tables openssl curl
+FROM golang:1.21-alpine
+RUN apk update && apk add --no-cache openssl curl
+
 WORKDIR /app
 
 # ========= CONFIG =========
