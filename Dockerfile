@@ -16,7 +16,7 @@ RUN git clone -b $BRANCH $MODIFIED_DERPER_GIT tailscale --depth 1 && \
     rm -rf /app/tailscale
 
 FROM golang:latest 
-RUN apk update && apk add --no-cache openssl curl
+
 
 WORKDIR /app
 
